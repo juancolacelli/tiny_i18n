@@ -1,0 +1,50 @@
+== TinyI18n
+
+This gem is a reduced implementation of I18n gem.
+
+== Installation
+
+Just add TinyI18n in your Gemfile:
+
+  gem "tiny_i18n"
+
+== Method of use
+
+You must create a locales file like:
+
+  # config/locales.yml
+  en:
+    hello: "Hello %{name}"
+    hello_world: "Hello world"
+    names:
+      admin: "Administrator"
+
+  es:
+    hello: "Hola %{name}"
+    hello_world: "Hola mundo"
+    names:
+      admin: "Administrador"
+
+Then you can use it:
+
+  I18N = TinyI18n.new("config/locales.yml")
+
+  # English
+  I18N.locale = "en"
+  I18N.translate("hello_world")
+  #=> "Hello world"
+  I18N.translate("hello", :name => I18N.translate("names.admin"))
+  #=> "Hello Administrator"
+
+  # Spanish
+  I18N.locale = "es"
+  I18N.translate("hello_world")
+  #=> "Hola mundo"
+  I18N.translate("hello", :name => I18N.translate("names.admin"))
+  #=> "Hola Administrador"
+
+== License
+
+TinyI18n is released under the MIT license:
+
+* http://www.opensource.org/licenses/MIT
